@@ -7,8 +7,22 @@ Component({
   properties: {
     // 当前选中日期
     model: {
-      type: String | Object,
-      value: ''
+      type: String | Number,
+      value: Date.now()
+    },
+    mainColor: {
+      type: String,
+      value: '#636FA4'
+    },
+    // 状态特殊的日期
+    specialDate: {
+      type: Array,
+      value: []
+    },
+    // 状态特殊的日期的字体颜色
+    specialFontColor: {
+      type: String,
+      value: '#ff9472'
     }
   },
 
@@ -18,13 +32,13 @@ Component({
   data: {
     weekArr: ['一', '二', '三', '四', '五', '六', '日'],
     activeDate: '',
-    dateNow: new Date(),
     currentYear: '',
     currentMonth: '',
     currentDate: '',
     currentWeek: '',
     currentMonthDays: [],
-    blankDayItem: []
+    blankDayItem: [],
+    specialDateStringArr: []
   },
 
   /**
@@ -35,6 +49,7 @@ Component({
      * 入口函数
      */
     onLoad() {
+      this.setData({ specialDateStringArr: this.properties.specialDate.map(a => new Date(a).toLocaleDateString()) });
       this.setData({ activeDate: this.properties.model });
       this.setCurrentStatus(this.data.activeDate);
     },
@@ -47,12 +62,21 @@ Component({
       this.setData({ currentYear: Utils.getYear(date) });
       this.setData({ currentMonth: Utils.getMonth(date) });
       this.setData({ currentDate: Utils.getDate(date)});
-      this.setData({ currentMonthDays:  Utils.creatNewArray(1, Utils.getCurrentMonthDay(date))});
+      const dayArr = Utils.creatNewArray(1, Utils.getCurrentMonthDay(date));
+      
+      this.setData({ currentMonthDays:
+        dayArr.map(a => {
+          return {
+            date: new Date(this.data.currentYear, this.data.currentMonth - 1, a).toLocaleDateString(),
+            dayText: a,
+            special: this.data.specialDateStringArr.includes(new Date(this.data.currentYear, this.data.currentMonth - 1, a).toLocaleDateString())
+          }
+        })
+      });
+      // 计算每个月1号周几开始
       const _date_day = new Date(Utils.getYear(date), (Utils.getMonth(date) - 1), 1).getDay();
-      // console.log(new Date(Utils.getYear(date), (Utils.getMonth(date) - 1), 1).getDay());
       const blankNum = _date_day - 1;
       this.setData({ blankDayItem: blankNum ? Utils.creatNewArray(0, blankNum - 1) : [] });
-      // console.log(this.data.blankDayItem);
     },
 
     /**
@@ -60,10 +84,14 @@ Component({
      * @param {object} event
      */
     dayClick(event) {
-      // console.log(event);
       const _date = event.target.dataset.day;
-      this.setData({ currentDate:  _date});
-      // this.setCurrentStatus();
+      this.setData({ currentDate: _date});
+      const params = {
+        date: event.target.dataset.date,
+        dayText: event.target.dataset.day,
+        isSpecial: event.target.dataset.special,
+      }
+      this.triggerEvent('dayTouch', params);
     },
 
     /**
@@ -74,6 +102,7 @@ Component({
       const _month = Utils.getMonth(this.data.activeDate);
       this.setData({ activeDate: new Date(_year, _month - 2, 1) });
       this.setCurrentStatus(this.data.activeDate);
+      this.triggerEvent('preMonth', this.data.activeDate);
     },
     
     /**
@@ -84,6 +113,7 @@ Component({
       const _month = Utils.getMonth(this.data.activeDate);
       this.setData({ activeDate: new Date(_year, _month, 1) });
       this.setCurrentStatus(this.data.activeDate);
+      this.triggerEvent('nextMonth', this.data.activeDate);
     },
 
     /**
@@ -92,6 +122,7 @@ Component({
     backToday() {
       this.setData({ activeDate: new Date() });
       this.setCurrentStatus(this.data.activeDate);
+      this.triggerEvent('backToday', this.data.activeDate);
     }
   },
   /**

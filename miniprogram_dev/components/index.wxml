@@ -1,5 +1,6 @@
 <!-- <view class="index other">{{prop}}-{{flag}}</view>
 <other></other> -->
 <view class="index">
-  <calendar model="{{model}}"></calendar>
+  <calendar model="{{ model }}" main-color="{{ mainColor }}" special-date="{{ specialDate }}" special-font-color="{{ specialFontColor }}" 
+    bind:dayTouch="dayTouch" bind:preMonth="preMonth" bind:nextMonth="nextMonth" bind:backToday="backToday"/>
 </view>

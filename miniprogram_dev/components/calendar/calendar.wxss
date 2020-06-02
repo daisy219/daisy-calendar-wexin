@@ -1,9 +1,9 @@
 /* components/calendar/calendar.wxss */
 .daisy-calendar {
-  /* width: 100%; */
   border: 1px solid #f5f5f5;
   border-radius: 4px;
   padding: 30rpx;
+  color: #303133;
 }
 .daisy-calendar .daisy-calendar-title {
   text-align: center;
@@ -23,6 +23,7 @@
   border: 1px solid #f5f5f5;
   overflow: hidden;
   float: right;
+  color: #666;
 }
 .daisy-calendar .daisy-calendar-btn-group .item {
   font-size: 30rpx;
@@ -55,8 +56,9 @@
   height: 80rpx;
   line-height: 80rpx;
   font-size: 38rpx;
+  border-radius: 50%;
+  box-sizing: border-box;
 }
 .daisy-calendar .daisy-calendar-day-content .active {
-  border-radius: 50%;
-  background-color: aquamarine;
+  color: #fff;
 }
