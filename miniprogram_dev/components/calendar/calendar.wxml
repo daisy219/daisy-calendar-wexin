@@ -1,0 +1,22 @@
+<!--components/calendar/calendar.wxml-->
+<view class="daisy-calendar">
+  <view class="daisy-calendar-title">
+    <text>{{currentYear}}年{{currentMonth}}月</text>
+  </view>
+  <view class="daisy-calendar-btn-group-wrap">
+    <view class="daisy-calendar-btn-group">
+      <view class="item" bindtap="preMonth">上个月</view>
+      <view class="item" bindtap="backToday">今天</view>
+      <view class="item" bindtap="nextMonth">下个月</view>
+    </view>
+  </view>
+
+  <view class="daisy-calendar-week-row">
+    <view wx:for="{{ weekArr }}" wx:key="item" wx:key="item" class="item">{{ item }}</view>
+  </view>
+  <view class="daisy-calendar-day-content">
+    <view class="item" wx:for="{{ blankDayItem }}" wx:key="item"></view>
+    <view class="item {{item === currentDate ? 'active' : '' }}" wx:for="{{currentMonthDays}}" wx:key="item" data-day="{{item}}"
+      bindtap="dayClick">{{ item }}</view>
+  </view>
+</view>

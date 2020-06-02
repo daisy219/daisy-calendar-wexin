@@ -1,0 +1,10 @@
+{
+  "component": true,
+  "usingComponents": {
+    "other": "./other",
+    "calendar": "../components/calendar/calendar"
+  },
+  "componentGenerics": {
+    "genericsTest": true
+  }
+}

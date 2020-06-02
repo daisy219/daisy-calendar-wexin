@@ -1,0 +1,5 @@
+<!-- <view class="index other">{{prop}}-{{flag}}</view>
+<other></other> -->
+<view class="index">
+  <calendar model="{{model}}"></calendar>
+</view>
