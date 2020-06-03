@@ -56,10 +56,8 @@ module.exports = {
     'no-underscore-dangle': 'off',
     'node/no-deprecated-api': 'error',
     'node/process-exit-as-throw': 'error',
-    'object-curly-spacing': [
-      'error',
-      'never'
-    ],
+    'object-curly-spacing': [0, "never"],
+    "object-shorthand": [0, "never"],
     'operator-linebreak': [
       'error',
       'after',
@@ -80,10 +78,7 @@ module.exports = {
         'unnecessary': true
       }
     ],
-    'semi': [
-      'error',
-      'never'
-    ],
+    'semi': [0, "never"],
     'no-await-in-loop': 'off',
     'no-restricted-syntax': 'off',
     'promise/always-return': 'off',

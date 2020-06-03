@@ -2,5 +2,5 @@
 @import "./reset.wxss";
 
 .index {
-  color: green;
+  padding: 30rpx;
 }

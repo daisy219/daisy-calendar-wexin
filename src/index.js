@@ -1,24 +1,42 @@
-const _ = require('./utils')
 
 Component({
   properties: {
-    prop: {
+    model: {
       type: String,
-      value: 'index.properties'
+      value: new Date().toLocaleDateString()
     },
+    mainColor: {
+      type: String,
+      value: '#636FA4'
+    },
+    specialDate: {
+      type: Array,
+      value: []
+    },
+    specialFontColor: {
+      type: String,
+      value: '#ff9472'
+    }
   },
-  data: {
-    flag: false,
-  },
-  lifetimes: {
-    attached() {
-      wx.getSystemInfo({
-        success: () => {
-          this.setData({
-            flag: _.getFlag(),
-          })
-        }
-      })
+  methods: {
+    /** 点击日期 */
+    dayTouch: function (val) {
+      this.triggerEvent('dayTouch', val.detail);
+    },
+
+    /** 点击上个月 */
+    preMonth: function (val) {
+      this.triggerEvent('preMonth', val.detail);
+    },
+
+    /** 点击下个月 */
+    nextMonth: function (val) {
+      this.triggerEvent('nextMonth', val.detail);
+    },
+
+    /** 点击今天 */
+    backToday: function (val) {
+      this.triggerEvent('backToday', val.detail);
     }
   }
-})
+});

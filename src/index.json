@@ -1,7 +1,7 @@
 {
   "component": true,
   "usingComponents": {
-    "other": "./other"
+    "calendar": "./calendar/calendar"
   },
   "componentGenerics": {
     "genericsTest": true

@@ -1,2 +1,1 @@
-<comp model="{{ activeDate }}"
-    bind:dayTouch="dayTouch" bind:preMonth="preMonth" bind:nextMonth="nextMonth" bind:backToday="backToday"></comp>
+<comp></comp>

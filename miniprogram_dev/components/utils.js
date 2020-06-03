@@ -1,6 +1,6 @@
 module.exports = {
   getFlag() {
-    return true
+    return true;
   },
   /** 获取date所在年
    * @param { date | stirng } date
@@ -11,7 +11,7 @@ module.exports = {
   },
   /**
    * 获取date所在月
-   * @param { data | string } date 
+   * @param { data | string } date
    */
   getMonth(date) {
     const _date = new Date(date);
@@ -20,7 +20,7 @@ module.exports = {
 
   /**
    * 获取date所在日
-   * @param { data | string } date 
+   * @param { data | string } date
    */
   getDate(date) {
     const _date = new Date(date);

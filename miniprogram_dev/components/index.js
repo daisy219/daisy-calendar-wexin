@@ -82,24 +82,22 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */,
-/* 1 */
+/******/ ({
+
+/***/ 2:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _ = __webpack_require__(2);
-
 Component({
   properties: {
     model: {
-      type: String | Object,
-      value: Date.now()
+      type: String,
+      value: new Date().toLocaleDateString()
     },
     mainColor: {
       type: String,
@@ -114,58 +112,30 @@ Component({
       value: '#ff9472'
     }
   },
-  data: {
-    flag: false
-  },
-  lifetimes: {
-    attached: function attached() {
-      var _this = this;
-
-      wx.getSystemInfo({
-        success: function success() {
-          _this.setData({
-            flag: _.getFlag()
-          });
-        }
-      });
-    }
-  },
   methods: {
     /** 点击日期 */
-    dayTouch: function(val) {
+    dayTouch: function dayTouch(val) {
       this.triggerEvent('dayTouch', val.detail);
     },
 
     /** 点击上个月 */
-    preMonth: function(val) {
+    preMonth: function preMonth(val) {
       this.triggerEvent('preMonth', val.detail);
     },
 
     /** 点击下个月 */
-    nextMonth: function(val) {
+    nextMonth: function nextMonth(val) {
       this.triggerEvent('nextMonth', val.detail);
     },
 
     /** 点击今天 */
-    backToday: function(val) {
+    backToday: function backToday(val) {
       this.triggerEvent('backToday', val.detail);
     }
   }
 });
 
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = {
-  getFlag: function getFlag() {
-    return true;
-  }
-};
-
 /***/ })
-/******/ ]);
+
+/******/ });
 //# sourceMappingURL=index.js.map

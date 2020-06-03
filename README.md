@@ -9,7 +9,7 @@
 
 ## 使用
 
-* git clone整个项目，里面miniprogram_dev\components\calendar是组件源码，也没几行，直接拿来放到自己项目里就行，有啥想自定义的就可以随心所欲的改了~
+* git clone整个项目，里面src\calendar是组件源码，也没几行，直接拿来放到自己项目里就行，有啥想自定义的就可以随心所欲的改了~
 
 * 通过npm安装。还没发布，等等发布了再说~
 

@@ -14,7 +14,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.10.4",
 	"appid": "wx91fcf99261c06135",
-	"projectname": "daisy-calendar",
+	"projectname": "miniprogram-demo",
 	"isGameTourist": false,
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
