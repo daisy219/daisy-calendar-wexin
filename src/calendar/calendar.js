@@ -1,5 +1,5 @@
 // components/calendar/calendar.js
-import Utils from '../utils';
+import Utils from '../../utils';
 
 Component({
   /**
@@ -50,8 +50,16 @@ Component({
      * 入口函数
      */
     onLoad() {
+      Utils.watch(this, {
+        specialDate: function (newVal) {
+          this.setData({
+            specialDateStringArr: newVal.map(a => Utils.yyyymmdd(new Date(a), '/'))
+          });
+          this.setCurrentStatus(this.data.activeDate);
+        }
+      })
       this.setData({
-        specialDateStringArr: this.properties.specialDate.map(a => new Date(a).toLocaleDateString())
+        specialDateStringArr: this.properties.specialDate.map(a => Utils.yyyymmdd(new Date(a), '/'))
       });
       this.setData({
         activeDate: this.properties.model
@@ -64,20 +72,18 @@ Component({
      * @param {date} date
      */
     setCurrentStatus(date) {
-      this.setData({currentYear: Utils.getYear(date)});
-      this.setData({currentMonth: Utils.getMonth(date)});
-      this.setData({currentDate: Utils.getDate(date)});
+      this.setData({ currentYear: Utils.getYear(date) });
+      this.setData({ currentMonth: Utils.getMonth(date) });
+      this.setData({ currentDate: Utils.getDate(date) });
       const dayArr = Utils.creatNewArray(1, Utils.getCurrentMonthDay(date));
 
       this.setData({
         currentMonthDays: dayArr.map(a => (
           {
-            date: new Date(this.data.currentYear, this.data.currentMonth - 1, a)
-              .toLocaleDateString(),
+            date: Utils.yyyymmdd(new Date(this.data.currentYear, this.data.currentMonth - 1, a), '/'),
             dayText: a,
             special: this.data.specialDateStringArr
-              .includes(new Date(this.data.currentYear, this.data.currentMonth - 1, a)
-                .toLocaleDateString())
+              .includes(Utils.yyyymmdd(new Date(this.data.currentYear, this.data.currentMonth - 1, a), '/'))
           }
         ))
       });
@@ -93,7 +99,7 @@ Component({
      */
     dayClick(event) {
       const _date = event.target.dataset.day;
-      this.setData({currentDate: _date});
+      this.setData({ currentDate: _date });
       const params = {
         date: event.target.dataset.date,
         dayText: event.target.dataset.day,
@@ -108,7 +114,7 @@ Component({
     preMonth() {
       const _year = Utils.getYear(this.data.activeDate);
       const _month = Utils.getMonth(this.data.activeDate);
-      this.setData({activeDate: new Date(_year, _month - 2, 1)});
+      this.setData({ activeDate: new Date(_year, _month - 2, 1) });
       this.setCurrentStatus(this.data.activeDate);
       this.triggerEvent('preMonth', this.data.activeDate);
     },
@@ -128,7 +134,7 @@ Component({
      * 点击今天
      */
     backToday() {
-      this.setData({activeDate: new Date()});
+      this.setData({ activeDate: new Date() });
       this.setCurrentStatus(this.data.activeDate);
       this.triggerEvent('backToday', this.data.activeDate);
     }
